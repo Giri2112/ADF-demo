@@ -1,0 +1,9 @@
+{
+	"name": "Day7",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "246e67fd-910c-489b-97bd-690ff5d5bb55",
+		"tenantId": "40a2b380-2435-4231-84c9-740ad80d45aa"
+	}
+}

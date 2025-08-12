@@ -1,0 +1,91 @@
+{
+	"name": "Tumbling_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Tumbling _copy_activity",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.starttime",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.endtime",
+								"type": "Expression"
+							},
+							"wildcardFolderPath": "Source",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Tumblingsource",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Tumblingwindowdes",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"starttime": {
+				"type": "string",
+				"defaultValue": "@trigger().outputs.windowStartTime"
+			},
+			"endtime": {
+				"type": "string",
+				"defaultValue": "@trigger().outputs.windowEndTime"
+			}
+		},
+		"folder": {
+			"name": "Day 8"
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-08-11T22:18:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
