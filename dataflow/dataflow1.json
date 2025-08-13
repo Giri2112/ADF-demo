@@ -1,0 +1,76 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Source21",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText24",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          transactions_id as integer,",
+				"          sale_date as string,",
+				"          sale_time as string,",
+				"          customer_id as string,",
+				"          gender as string,",
+				"          age as string,",
+				"          category as string,",
+				"          quantiy as string,",
+				"          price_per_unit as string,",
+				"          cogs as string,",
+				"          total_sale as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 select(mapColumn(",
+				"          transactions_id,",
+				"          sale_date,",
+				"          sale_time,",
+				"          customer_id,",
+				"          gender,",
+				"          age,",
+				"          category,",
+				"          quantiy,",
+				"          price_per_unit,",
+				"          total_sale",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          branch_id as string,",
+				"          manager_id as string,",
+				"          branch_address as string,",
+				"          contact_no as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

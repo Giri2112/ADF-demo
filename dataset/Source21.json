@@ -1,0 +1,68 @@
+{
+	"name": "Source21",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "SQL - Retail Sales Analysis_utf .csv",
+				"fileSystem": "day10"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "transactions_id",
+				"type": "String"
+			},
+			{
+				"name": "sale_date",
+				"type": "String"
+			},
+			{
+				"name": "sale_time",
+				"type": "String"
+			},
+			{
+				"name": "customer_id",
+				"type": "String"
+			},
+			{
+				"name": "gender",
+				"type": "String"
+			},
+			{
+				"name": "age",
+				"type": "String"
+			},
+			{
+				"name": "category",
+				"type": "String"
+			},
+			{
+				"name": "quantiy",
+				"type": "String"
+			},
+			{
+				"name": "price_per_unit",
+				"type": "String"
+			},
+			{
+				"name": "cogs",
+				"type": "String"
+			},
+			{
+				"name": "total_sale",
+				"type": "String"
+			}
+		]
+	}
+}
