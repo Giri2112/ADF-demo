@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "sorce.csv",
 				"folderPath": "Destination",
 				"fileSystem": "practice"
 			},
