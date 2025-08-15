@@ -1,5 +1,5 @@
 {
-	"name": "Delimitedmovieout",
+	"name": "DelimitedText26",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage2",
@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Movie.csv",
 				"folderPath": "cleanedmovie",
 				"fileSystem": "day11"
 			},
