@@ -1,0 +1,40 @@
+{
+	"name": "memberdp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "flowlet_final",
+				"fileSystem": "day11"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "emp_name",
+				"type": "String"
+			},
+			{
+				"name": "position",
+				"type": "String"
+			},
+			{
+				"name": "salary",
+				"type": "String"
+			},
+			{
+				"name": "branch_id",
+				"type": "String"
+			}
+		]
+	}
+}
