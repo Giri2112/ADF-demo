@@ -22,7 +22,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "Delimitedmovieout",
+						"referenceName": "aggmovie",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
@@ -81,7 +81,7 @@
 				"     partitionBy('hash', 1)) ~> sink1",
 				"selectmovie sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['Cleaned with aggregation.csv'],",
+				"     partitionFileNames:['Cleanedwithaggregation.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
