@@ -1,0 +1,41 @@
+{
+	"name": "empflolet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "employees.csv",
+				"folderPath": "Flowlets_raw_datasets",
+				"fileSystem": "day11"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "emp_name",
+				"type": "String"
+			},
+			{
+				"name": "position",
+				"type": "String"
+			},
+			{
+				"name": "salary",
+				"type": "String"
+			},
+			{
+				"name": "branch_id",
+				"type": "String"
+			}
+		]
+	}
+}

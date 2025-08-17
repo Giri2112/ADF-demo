@@ -1,0 +1,48 @@
+{
+	"name": "employeewithflowlet",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empflolet",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "flowlet1",
+					"flowlet": {
+						"referenceName": "flowlet1",
+						"type": "DataFlowReference"
+					}
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp_name as string,",
+				"          position as string,",
+				"          salary as string,",
+				"          branch_id as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 compose(mapColumn(",
+				"          id = emp_name,",
+				"          name = emp_name,",
+				"          address = emp_name,",
+				"          reg_date = emp_name,",
+				"          position,",
+				"          salary,",
+				"          branch_id",
+				"     ),",
+				"     composition: 'flowlet1') ~> flowlet1@(output1)"
+			]
+		}
+	}
+}
