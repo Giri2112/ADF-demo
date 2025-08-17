@@ -24,6 +24,15 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregateMovie"
+				},
+				{
+					"name": "joinMovie"
+				},
+				{
+					"name": "selectmovie"
 				}
 			],
 			"scriptLines": [
@@ -37,6 +46,23 @@
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 derive(MovieTitle = toString(left(Title, length(Title)-6)),",
 				"          Year = toInteger(trim(right(Title, 6), '()'))) ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(Year),",
+				"     Movierelaesedinperticularyear = count()) ~> aggregateMovie",
+				"aggregateMovie, derivedColumn1 join(aggregateMovie@Year == derivedColumn1@Year,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinMovie",
+				"joinMovie select(mapColumn(",
+				"          MovieId,",
+				"          MovieTitle,",
+				"          Year = aggregateMovie@Year,",
+				"          Genres,",
+				"          Movierelaesedinperticularyear,",
+				"          Year = derivedColumn1@Year",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectmovie",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['Movies.csv'],",
