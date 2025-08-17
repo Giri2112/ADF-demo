@@ -1,0 +1,47 @@
+{
+	"name": "memberdeduplication",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Member_depulication",
+						"type": "DatasetReference"
+					},
+					"name": "Memberdp"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          member_name as string,",
+				"          member_address as string,",
+				"          reg_date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Memberdp",
+				"Memberdp aggregate(groupBy(member_name,",
+				"          member_address,",
+				"          reg_date),",
+				"     count = count()) ~> aggregate1",
+				"aggregate1 select(mapColumn(",
+				"          member_name,",
+				"          member_address,",
+				"          reg_date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
+			]
+		}
+	}
+}

@@ -1,0 +1,37 @@
+{
+	"name": "Member_depulication",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "members.csv",
+				"folderPath": "Flowlets_raw_datasets",
+				"fileSystem": "day11"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "member_name",
+				"type": "String"
+			},
+			{
+				"name": "member_address",
+				"type": "String"
+			},
+			{
+				"name": "reg_date",
+				"type": "String"
+			}
+		]
+	}
+}
